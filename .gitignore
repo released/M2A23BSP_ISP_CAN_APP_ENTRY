@@ -1,0 +1,42 @@
+# Local engineering records
+/MANUAL_CLEANUP.md
+/HANDOFF.md
+/CODEX_HANDOFF.md
+/SELF_CHECK.md
+/AGENTS.md
+/docs/internal/
+/.codex/
+/.claude/
+
+# Keil user state and compiler outputs
+**/*.uvguix.*
+**/*.uvoptx
+**/Nu_Link_Driver.ini
+**/obj/
+**/lst/
+*.axf
+*.bin
+*.hex
+*.map
+*.lnp
+*.dep
+*.d
+*.o
+
+# Local tools and settings
+*.exe
+*.ini
+!/SampleCode/Template/AP/Keil/srec_cat.exe
+
+# Original screenshots containing local absolute paths
+/isp_tool_can_interface.jpg
+/isp_tool_after_connect.jpg
+
+# Local raw verification captures
+/log_*.jpg
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*~
