@@ -18,7 +18,7 @@ static const uint8_t s_au8IspConnectRequest[8] =
 /*_____ M A C R O S ________________________________________________________*/
 
 /*_____ F U N C T I O N S __________________________________________________*/
-uint8_t APP_CAN_ISP_ENTRY_Init(CANFD_T *psCanfd, uint32_t u32FilterIndex)
+uint8_t APP_CAN_ISP_ENTRY_Init(CANFD_T *psCanfd, uint32_t u32ReservedFilterIndex)
 {
     uint32_t u32FilterCount;
 
@@ -31,13 +31,13 @@ uint8_t APP_CAN_ISP_ENTRY_Init(CANFD_T *psCanfd, uint32_t u32FilterIndex)
     }
 
     u32FilterCount = (psCanfd->SIDFC & CANFD_SIDFC_LSS_Msk) >> CANFD_SIDFC_LSS_Pos;
-    if (u32FilterIndex >= u32FilterCount)
+    if (u32ReservedFilterIndex >= u32FilterCount)
     {
         return 0U;
     }
 
     CANFD_SetSIDFltr(psCanfd,
-                     u32FilterIndex,
+                     u32ReservedFilterIndex,
                      CANFD_RX_FIFO0_STD_MASK(APP_CAN_ISP_ENTRY_REQUEST_ID, 0x7FFU));
 
     return 1U;

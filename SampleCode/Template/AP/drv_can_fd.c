@@ -43,6 +43,7 @@ static uint32_t g_u32CanRecoveryFailCount = 0U;
 #define CANFD_ERROR_LOG_INTERVAL  (1000U)
 #define CANFD_RECOVERY_RETRY_MS   (100U)
 #define CANFD_RECOVERY_TIMEOUT_MS (1000U)
+#define CAN_APP_ISP_ENTRY_SID_FILTER_INDEX (0U)
 
 #define CANFD_RECOVERY_IDLE       (0U)
 #define CANFD_RECOVERY_REQUESTED  (1U)
@@ -661,11 +662,6 @@ void CAN_Init(void)
     }
     CANFD_Open(CANFD0, &sCANFD_Config);
 
-    if (APP_CAN_ISP_ENTRY_Init(CANFD0, APP_CAN_ISP_ENTRY_FILTER_INDEX) == 0U)
-    {
-        printf("CAN ISP entry filter init failed\n");
-    }
-
 #if (CAN_APP_ENABLE_FD_MODE == 1U)
     if (g_u8CanFdModeOpened)
     {
@@ -711,6 +707,12 @@ void CAN_Init(void)
 
     /* Clear all pending status before enabling interrupt */
     CANFD_ClearStatusFlag(CANFD0, CANFD_INT_ALL_SIGNALS);
+
+    /* Install the ISP entry filter after all application SID filter writes. */
+    if (APP_CAN_ISP_ENTRY_Init(CANFD0, CAN_APP_ISP_ENTRY_SID_FILTER_INDEX) == 0U)
+    {
+        printf("CAN ISP entry filter init failed\n");
+    }
 
     /* Non-matching Frames with Extended ID and Standard ID are stored in Rx FIFO0 or Rx FIFO1, reject all remote frames with 11-bit standard IDs and 29-bit extended IDs */
     CANFD_SetGFC(CANFD0, eCANFD_ACC_NON_MATCH_FRM_RX_FIFO0, eCANFD_ACC_NON_MATCH_FRM_RX_FIFO1, 1, 1);
