@@ -213,13 +213,13 @@ Debug UART 由 `main.c` 的 `APP_DEBUG_UART_SELECT` 選擇，baud rate 固定為
 
 | `APP_DEBUG_UART_SELECT` | 適用板子 | UART | RXD | TXD |
 | --- | --- | --- | --- | --- |
-| `APP_DEBUG_UART_CUSTOMER_PCB` | 客戶 PCB（預設） | UART1 | PB.6 | PB.7 |
+| `APP_DEBUG_UART_CUSTOM_PCB` | Custom PCB（預設） | UART1 | PB.6 | PB.7 |
 | `APP_DEBUG_UART_M2A23_EVB` | M2A23 EVB | UART0 | PB.12 | PB.13 |
 
 程式內預設設定如下，也可由 Keil compiler define 覆寫：
 
 ```c
-#define APP_DEBUG_UART_SELECT APP_DEBUG_UART_CUSTOMER_PCB
+#define APP_DEBUG_UART_SELECT APP_DEBUG_UART_CUSTOM_PCB
 ```
 
 - CANFD0：PC.4 RXD、PC.5 TXD。

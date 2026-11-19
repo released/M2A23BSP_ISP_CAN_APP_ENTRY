@@ -17,15 +17,15 @@ volatile struct flag_32bit flag_PROJ_CTL;
 #define FLAG_PROJ_SEND_CAN_2                            (flag_PROJ_CTL.bit4)
 
 /*_____ D E F I N I T I O N S ______________________________________________*/
-#define APP_DEBUG_UART_CUSTOMER_PCB                     (0U)
+#define APP_DEBUG_UART_CUSTOM_PCB                       (0U)
 #define APP_DEBUG_UART_M2A23_EVB                        (1U)
 
 #ifndef APP_DEBUG_UART_SELECT
-#define APP_DEBUG_UART_SELECT                           APP_DEBUG_UART_CUSTOMER_PCB
+#define APP_DEBUG_UART_SELECT                           APP_DEBUG_UART_CUSTOM_PCB
 // #define APP_DEBUG_UART_SELECT                           APP_DEBUG_UART_M2A23_EVB
 #endif
 
-#if (APP_DEBUG_UART_SELECT == APP_DEBUG_UART_CUSTOMER_PCB)
+#if (APP_DEBUG_UART_SELECT == APP_DEBUG_UART_CUSTOM_PCB)
 #define APP_DEBUG_UART                                  UART1
 #define APP_DEBUG_UART_RST                              UART1_RST
 #define APP_DEBUG_UART_IRQn                             UART1_IRQn
@@ -642,7 +642,7 @@ void SYS_Init(void)
     CLK->AHBCLK |= CLK_AHBCLK_GPIOBCKEN_Msk | CLK_AHBCLK_GPIOCCKEN_Msk |
                    CLK_AHBCLK_GPIOFCKEN_Msk;
 
-#if (APP_DEBUG_UART_SELECT == APP_DEBUG_UART_CUSTOMER_PCB)
+#if (APP_DEBUG_UART_SELECT == APP_DEBUG_UART_CUSTOM_PCB)
     CLK_EnableModuleClock(UART1_MODULE);
     CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL2_UART1SEL_HIRC, CLK_CLKDIV0_UART1(1));
 #else
@@ -660,7 +660,7 @@ void SYS_Init(void)
     CLK_EnableModuleClock(WDT_MODULE);
     CLK_SetModuleClock(WDT_MODULE, CLK_CLKSEL1_WDTSEL_LIRC, 0);
 
-#if (APP_DEBUG_UART_SELECT == APP_DEBUG_UART_CUSTOMER_PCB)
+#if (APP_DEBUG_UART_SELECT == APP_DEBUG_UART_CUSTOM_PCB)
     SET_UART1_RXD_PB6();
     SET_UART1_TXD_PB7();
 #else

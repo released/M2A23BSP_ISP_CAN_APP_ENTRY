@@ -12,6 +12,7 @@ $ExpectedRemote = 'https://github.com/released/M2A23BSP_ISP_CAN_APP_ENTRY.git'
 $ExpectedBranch = 'main'
 $ProjectRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $KnownLocalTrackedFiles = @(
+    'github_push.bat',
     'SampleCode/Template/AP/Keil/Template.uvguix.AveryC',
     'SampleCode/Template/ISP_CAN/KEIL/ISP_CAN.uvguix.AveryC',
     'SampleCode/Template/AP/Keil/Nu_Link_Driver.ini',
@@ -182,7 +183,7 @@ function Test-ForbiddenPath
 
     if ($KnownAllowedTrackedFiles -ccontains $normalized) { return $false }
     if ($normalized -match '(^|/)(\.git|\.vs|\.codex|\.claude|obj|lst|Debug|Release|captures|recordings|sessions|logs|private|tmp|artifacts)(/|$)') { return $true }
-    if ($normalized -match '^(docs/internal/|MANUAL_CLEANUP\.md$|HANDOFF\.md$|CODEX_HANDOFF\.md$|SELF_CHECK\.md$|AGENTS\.md$)') { return $true }
+    if ($normalized -match '^(docs/internal/|github_push\.bat$|MANUAL_CLEANUP\.md$|HANDOFF\.md$|CODEX_HANDOFF\.md$|SELF_CHECK\.md$|AGENTS\.md$)') { return $true }
     if ($leaf -match '(?i)\.uvguix\.' -or $leaf -match '(?i)\.(user|suo|ncb)$') { return $true }
     if ($normalized -match '(?i)(^|/)(auth\.json|credentials[^/]*|secrets?\.[^/]+|\.env(?:\.[^/]+)?|github_push\.local\.psd1)$') { return $true }
     if ($normalized -match '(?i)\.(obj|o|axf|elf|bin|hex|map|lnp|dep|d|log|dmp|tmp|bak|exe|dll|zip|7z|ini)$') { return $true }
